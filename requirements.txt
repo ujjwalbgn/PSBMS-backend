@@ -1,0 +1,16 @@
+Django
+
+gunicorn
+
+Markdown
+
+Pillow
+
+django-filter
+
+djangorestframework
+
+whitenoise
+
+django-heroku
+
