@@ -18,7 +18,8 @@ def apiOverview(request):
         'List All Reminders' : '/reminder/',
         'Reminder Detail' : '/reminder/<str:pk>',
         'List All Possible Bills' : '/bill-monitor/',
-        'Possible Bill Details' : '/bill-monitor/<str:pk>'
+        'Possible Bill Details' : '/bill-monitor/<str:pk>',
+        'Prod Test': '/null/'
 		}
 	return Response(api_urls)
 
