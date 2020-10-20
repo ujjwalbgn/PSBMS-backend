@@ -21,3 +21,8 @@ class BillMonitorSerializers(serializers.ModelSerializer):
 	class Meta:
 		model = BillMonitor
 		fields ='__all__'
+
+class PayCheckSerializers(serializers.ModelSerializer):
+	class Meta:
+		model = BillMonitor
+		fields ='__all__'

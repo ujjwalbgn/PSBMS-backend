@@ -57,3 +57,17 @@ class BillMonitor(models.Model):
     def __str__(self):
         return self.title
 
+class PayCheck(models.Model):
+    BOOL_CHOICES = [('Yes', 'Yes'), ('No', 'No')]
+    FREQUENCY_CHOICES = [('Weekly', 'Weekly'), ('BiWeekly', 'BiWeekly'), ('Monthly', 'Monthly'),
+                         ('Quarterly','Quarterly'),('Semiannually','Semiannually'),('Annually','Annually')]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200, null=True)
+    description = models.TextField(blank=True, null=True)
+    payDateTime = models.DateTimeField(blank=True, default=datetime.now)
+    recursive = models.CharField(max_length=5, choices=BOOL_CHOICES,null=True)
+    recursiveFrequency = models.CharField(max_length=15, choices=FREQUENCY_CHOICES,null=True)
+
+    def __str__(self):
+        return self.title
