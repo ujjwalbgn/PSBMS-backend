@@ -51,6 +51,7 @@ class BillMonitor(models.Model):
     title = models.CharField(max_length=200, null=True)
     description = models.TextField(blank=True, null=True)
     dueDateTime = models.DateTimeField(blank=True, default=datetime.now)
+    amount = models.DecimalField(blank=True, null=True,  max_digits=19, decimal_places=2)
     recursive = models.CharField(max_length=5, choices=BOOL_CHOICES,null=True)
     recursiveFrequency = models.CharField(max_length=15, choices=FREQUENCY_CHOICES,null=True)
 
@@ -67,6 +68,23 @@ class PayCheck(models.Model):
     description = models.TextField(blank=True, null=True)
     payDateTime = models.DateTimeField(blank=True, default=datetime.now)
     recursive = models.CharField(max_length=5, choices=BOOL_CHOICES,null=True)
+    amount = models.DecimalField(blank=True, null=True,  max_digits=19, decimal_places=2)
+    recursiveFrequency = models.CharField(max_length=15, choices=FREQUENCY_CHOICES,null=True)
+
+    def __str__(self):
+        return self.title
+
+class CashFlow(models.Model):
+    BOOL_CHOICES = [('Yes', 'Yes'), ('No', 'No')]
+    FREQUENCY_CHOICES = [('Weekly', 'Weekly'), ('BiWeekly', 'BiWeekly'), ('Monthly', 'Monthly'),
+                         ('Quarterly','Quarterly'),('Semiannually','Semiannually'),('Annually','Annually')]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE,blank=True, null=True)
+    title = models.CharField(max_length=200, null=True)
+    description = models.TextField(blank=True, null=True)
+    payDateTime = models.DateTimeField(blank=True, default=datetime.now)
+    recursive = models.CharField(max_length=5, choices=BOOL_CHOICES,null=True)
+    amount = models.DecimalField(blank=True, null=True,  max_digits=19, decimal_places=2)
     recursiveFrequency = models.CharField(max_length=15, choices=FREQUENCY_CHOICES,null=True)
 
     def __str__(self):

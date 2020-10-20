@@ -1,167 +1,36 @@
-from django.shortcuts import render
-
-from rest_framework import status
-from rest_framework import viewsets
-from rest_framework import permissions
 from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework import renderers
 from rest_framework import viewsets
-from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
-
-
 from .serializers import *
 from .models import *
-from rest_framework import generics
-
-
-# Create your views here.
-# @api_view(['GET'])
-# def apiOverview(request):
-# 	api_urls = {
-# 		'List All Expenses':'/expenses/',
-#         'Expense Detail':'/expenses/<str:pk>/',
-#         'List All Reminders' : '/reminder/',
-#         'Reminder Detail' : '/reminder/<str:pk>',
-#         'List All Possible Bills' : '/bill-monitor/',
-#         'Possible Bill Details' : '/bill-monitor/<str:pk>'
-# 		}
-# 	return Response(api_urls)
-
-
-#Expenses
-# @api_view(['GET', 'POST'])
-# def expensesList(request, format=None):
-#     #List all Expenses or create new
-#     if request.method == 'GET':
-#         expenses = Expenses.objects.all()
-#         serializer = ExpensesSerializers(expenses, many= True)
-#         return Response(serializer.data)
-#
-#     elif request.method == 'POST':
-#         serializer = ExpensesSerializers(data = request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#
-#
-# @api_view(['GET', 'PUT', 'DELETE'])
-# def expenseDetails(request, pk, format=None):
-#     #List all Expenses or create new
-#     try:
-#         expense = Expenses.objects.get(id = pk)
-#     except:
-#         return Response(status=status.HTTP_404_NOT_FOUND)
-#
-#     if request.method == "GET":
-#         serializer = ExpensesSerializers(expense)
-#         return Response(serializer.data)
-#
-#     elif request.method == "PUT":
-#         serializer = ExpensesSerializers(expense, data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#
-#     elif request.method == 'DELETE':
-#         expense.delete()
-#         return Response(status=status.HTTP_204_NO_CONTENT)
-#
-#
-# #Reminder
-# @api_view(['GET', 'POST'])
-# def reminderList(request, format=None):
-#     #List all Reminder or create new
-#     if request.method == 'GET':
-#         reminder = Reminder.objects.all()
-#         serializer = ReminderSerializers(reminder, many= True)
-#         return Response(serializer.data)
-#
-#     elif request.method == 'POST':
-#         serializer = ReminderSerializers(data = request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#
-#
-# @api_view(['GET', 'PUT', 'DELETE'])
-# def reminderDetails(request, pk, format=None):
-#     #List all Reminder or create new
-#     try:
-#         reminder = Reminder.objects.get(id = pk)
-#     except:
-#         return Response(status=status.HTTP_404_NOT_FOUND)
-#
-#     if request.method == "GET":
-#         serializer = ReminderSerializers(reminder)
-#         return Response(serializer.data)
-#
-#     elif request.method == "PUT":
-#         serializer = ReminderSerializers(reminder, data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#
-#     elif request.method == 'DELETE':
-#         reminder.delete()
-#         return Response(status=status.HTTP_204_NO_CONTENT)
-#
-# #BillMonitor
-# @api_view(['GET', 'POST'])
-# def billMonitorList(request, format=None):
-#     #List all BillMonitor or create new
-#     if request.method == 'GET':
-#         billMonitor = BillMonitor.objects.all()
-#         serializer = ReminderSerializers(billMonitor, many= True)
-#         return Response(serializer.data)
-#
-#     elif request.method == 'POST':
-#         serializer = BillMonitorSerializers(data = request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#
-#
-# @api_view(['GET', 'PUT', 'DELETE'])
-# def billMonitorDetails(request, pk, format=None):
-#     #List all BillMonitor or create new
-#     try:
-#         billMonitor = BillMonitor.objects.get(id = pk)
-#     except:
-#         return Response(status=status.HTTP_404_NOT_FOUND)
-#
-#     if request.method == "GET":
-#         serializer = BillMonitorSerializers(billMonitor)
-#         return Response(serializer.data)
-#
-#     elif request.method == "PUT":
-#         serializer = BillMonitorSerializers(billMonitor, data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#
-#     elif request.method == 'DELETE':
-#         billMonitor.delete()
-#         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['GET'])
 def api_root(request, format=None):
     return Response({
-        'users': reverse('user-list', request=request, format=format),
-        'snippets': reverse('snippet-list', request=request, format=format)
+        'paycheck': reverse('paycheck-list', request=request, format=format),
+        # 'reminder': reverse('reminder-list', request=request, format=format)
     })
 
 # Class based views
 class PayCheckViewSet(viewsets.ModelViewSet):
     queryset = PayCheck.objects.all()
     serializer_class =PayCheckSerializers
+
+class ReminderViewSet(viewsets.ModelViewSet):
+    queryset = Reminder.objects.all()
+    serializer_class = ReminderSerializers
+
+class ExpensesViewSet(viewsets.ModelViewSet):
+    queryset = Expenses.objects.all()
+    serializer_class = ExpensesSerializers
+
+class BillMonitorViewSet(viewsets.ModelViewSet):
+    queryset = BillMonitor.objects.all()
+    serializer_class =BillMonitorSerializers
+
+class CashFlowViewSet(viewsets.ModelViewSet):
+    queryset = CashFlow.objects.all()
+    serializer_class = CashFlowSerializers

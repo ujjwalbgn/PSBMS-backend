@@ -24,5 +24,10 @@ class BillMonitorSerializers(serializers.ModelSerializer):
 
 class PayCheckSerializers(serializers.ModelSerializer):
 	class Meta:
-		model = BillMonitor
+		model = PayCheck
+		fields ='__all__'
+
+class CashFlowSerializers(serializers.ModelSerializer):
+	class Meta:
+		model = CashFlow
 		fields ='__all__'
