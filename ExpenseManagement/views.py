@@ -15,13 +15,20 @@ def api_root(request, format=None):
     })
 
 # Class based views
+class ReminderViewSet(viewsets.ModelViewSet):
+    # here ViewSet.ModelViewSet inherits from djangoREST provide action
+    # such as list and create.
+
+    # queryset stores all the objects obtained from the database.
+    queryset = Reminder.objects.all()
+
+    # serializer_class is used validating and deserializing input, and for
+    # serializing output. ReminderSerializers contains validation information
+    serializer_class = ReminderSerializers
+
 class PayCheckViewSet(viewsets.ModelViewSet):
     queryset = PayCheck.objects.all()
     serializer_class =PayCheckSerializers
-
-class ReminderViewSet(viewsets.ModelViewSet):
-    queryset = Reminder.objects.all()
-    serializer_class = ReminderSerializers
 
 class ExpensesViewSet(viewsets.ModelViewSet):
     queryset = Expenses.objects.all()
