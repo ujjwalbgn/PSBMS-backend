@@ -14,6 +14,7 @@ def api_root(request, format=None):
         # 'reminder': reverse('reminder-list', request=request, format=format)
     })
 
+
 # Class based views
 class ReminderViewSet(viewsets.ModelViewSet):
     # here ViewSet.ModelViewSet inherits from djangoREST provide action
@@ -26,17 +27,21 @@ class ReminderViewSet(viewsets.ModelViewSet):
     # serializing output. ReminderSerializers contains validation information
     serializer_class = ReminderSerializers
 
+
 class PayCheckViewSet(viewsets.ModelViewSet):
     queryset = PayCheck.objects.all()
-    serializer_class =PayCheckSerializers
+    serializer_class = PayCheckSerializers
+
 
 class ExpensesViewSet(viewsets.ModelViewSet):
     queryset = Expenses.objects.all()
     serializer_class = ExpensesSerializers
 
+
 class BillMonitorViewSet(viewsets.ModelViewSet):
     queryset = BillMonitor.objects.all()
-    serializer_class =BillMonitorSerializers
+    serializer_class = BillMonitorSerializers
+
 
 class CashFlowViewSet(viewsets.ModelViewSet):
     queryset = CashFlow.objects.all()
