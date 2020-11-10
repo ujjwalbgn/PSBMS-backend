@@ -9,6 +9,8 @@ router.register(r'reminder', views.ReminderViewSet)
 router.register(r'billMonitor', views.BillMonitorViewSet)
 router.register(r'payCheck', views.PayCheckViewSet)
 router.register(r'cashFlow', views.CashFlowViewSet)
+router.register(r'inventory', views.InventoryViewSet)
+
 
 
 # The API URLs are now determined automatically by the router.

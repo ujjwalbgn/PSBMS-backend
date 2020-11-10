@@ -92,3 +92,19 @@ class CashFlow(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Inventory(models.Model):
+    BOOL_CHOICES = [('Yes', 'Yes'), ('No', 'No')]
+
+    name = models.CharField(max_length=200, null=True)
+    description = models.TextField(blank=True, null=True)
+    cost_price = models.DecimalField(blank=True, null=True,  max_digits=19, decimal_places=2)
+    last_modified = models.DateField(auto_now_add=True)
+    barcode = models.CharField(max_length=200, null=True)
+    quantity = models.IntegerField(blank=True, null=True)
+    restock = models.CharField(max_length=5, choices=BOOL_CHOICES,null=True)
+    restock_quantity = models.IntegerField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name

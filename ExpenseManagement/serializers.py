@@ -37,3 +37,9 @@ class CashFlowSerializers(serializers.ModelSerializer):
 	class Meta:
 		model = CashFlow
 		fields = '__all__'
+
+
+class InventorySerializers(serializers.ModelSerializer):
+	class Meta:
+		model = Inventory
+		fields = '__all__'

@@ -46,3 +46,8 @@ class BillMonitorViewSet(viewsets.ModelViewSet):
 class CashFlowViewSet(viewsets.ModelViewSet):
     queryset = CashFlow.objects.all()
     serializer_class = CashFlowSerializers
+
+
+class InventoryViewSet(viewsets.ModelViewSet):
+    queryset = Inventory.objects.all()
+    serializer_class = InventorySerializers
