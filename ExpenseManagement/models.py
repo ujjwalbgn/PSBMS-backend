@@ -13,12 +13,7 @@ class CustomUser(AbstractUser):
     date_created = models.DateField(auto_now_add=True)
     birth_date = models.DateField(blank=True, null=True)
 
-    def __str__(self):
-        if self.firstname and self.lastname:
-            display = (self.firstname + " " + self.lastname)
-        else:
-            display = str(self.date_created)
-        return display
+
 
 
 class Expenses(models.Model):
