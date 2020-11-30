@@ -34,6 +34,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'corsheaders',
     'ExpenseManagement.apps.ExpensemanagementConfig',
 ]
 
@@ -61,6 +64,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     #'SessionMiddleware',
     #'AuthenticationMiddleware',
 
@@ -149,3 +154,11 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 STATIC_URL = '/static/'
+
+# CORS_ALLOWED_ORIGINS = [
+#
+#     "http://localhost:3000",
+#
+# ]
+
+CORS_ALLOW_ALL_ORIGINS = True
